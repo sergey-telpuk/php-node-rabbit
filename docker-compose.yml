@@ -4,6 +4,7 @@ services:
 
   php-app:
     restart: always
+    command: "./spiral serve -v -d"
     build:
       context: ./docker/php
       dockerfile: php.docker
@@ -14,6 +15,20 @@ services:
       - rabbitmq
     ports:
       - 8080:443
+    volumes:
+      - ./src/php-app:/app
+
+  php-file-wathcer:
+    container_name: php-app-file-wathcer
+    restart: always
+    command: php ./watcher.php
+    build:
+      context: ./docker/php
+      dockerfile: php.docker
+    depends_on:
+      - php-app
+    links:
+      - php-app
     volumes:
       - ./src/php-app:/app
 
@@ -32,7 +47,7 @@ services:
       - rabbitmq
     links:
       - rabbitmq
-
+#
   composer:
     logging:
       driver: none

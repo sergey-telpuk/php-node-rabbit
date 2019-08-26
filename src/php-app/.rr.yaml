@@ -42,7 +42,7 @@ jobs:
 
   workers:
     command: "php app.php"
-    pool.numWorkers: 2
+    pool.numWorkers: 10
 
 # serve static files
 static:
@@ -54,3 +54,6 @@ limit:
   services:
     http.maxMemory: 100
     jobs.maxMemory: 100
+
+rpc:
+  listen: tcp://php-app:6001

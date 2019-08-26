@@ -79,4 +79,9 @@ class App extends Kernel
         RoutesBootloader::class,
         LoggingBootloader::class,
     ];
+
+    protected const APP4 = [
+        RoutesBootloader::class,
+        LoggingBootloader::class,
+    ];
 }

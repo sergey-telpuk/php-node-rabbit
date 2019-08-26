@@ -35,7 +35,9 @@
     "cycle/orm": "^1.0",
     "cycle/proxy-factory": "^1.0",
     "cycle/annotated": "^2.0",
-    "cycle/migrations": "^1.0"
+    "cycle/migrations": "^1.0",
+    "idimsh/php-inotify-monitor": "dev-master",
+    "tsufeki/react-filesystem-monitor": "^0.4.1"
   },
   "scripts": {
     "post-create-project-cmd": [

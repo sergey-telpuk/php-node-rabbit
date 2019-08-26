@@ -10,6 +10,11 @@ RUN apk add --no-cache --virtual .persistent-deps \
     openssh \
     libzip-dev
 
+RUN apk add --no-cache \
+        $PHPIZE_DEPS \
+    && pecl install inotify \
+    && docker-php-ext-enable inotify
+
 RUN set -xe \
     && docker-php-ext-install \
         zip \

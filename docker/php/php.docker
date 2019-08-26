@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libzip-dev \
   unzip
 
+RUN pecl install inotify
+
 # Install PHP Extensions
 RUN docker-php-ext-install \
     zip \
@@ -14,10 +16,8 @@ RUN docker-php-ext-install \
     pdo_mysql \
     sockets
 
-RUN docker-php-ext-enable opcache sockets
+RUN docker-php-ext-enable opcache sockets inotify
 
 # Set up the application directory
 VOLUME ["/app"]
 WORKDIR /app
-
-ENTRYPOINT ["./spiral", "serve", "-v", "-d"]

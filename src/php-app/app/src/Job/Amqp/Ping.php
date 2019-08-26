@@ -22,7 +22,8 @@ class Ping extends AbstractJob
      */
     public function do(string $id, string $value)
     {
+
         // do something
-        error_log("pong by {$id}, value `{$value}`");
+        error_log("pong by {$id}, value sdsd sdfd ferfrgbb gfgf ewfrwefre `{$value}`");
     }
 }

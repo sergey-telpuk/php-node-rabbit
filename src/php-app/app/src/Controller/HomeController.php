@@ -41,7 +41,7 @@ class HomeController
     public function ping(QueueInterface $queue): string
     {
         return $queue->push(new Ping([
-            'value' => 'hello world'
+            'value' => 'hello sdsds dfsdfd world'
         ]));
     }
 }
