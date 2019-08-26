@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+
+  php-app:
+    restart: always
+    build:
+      context: ./docker/php
+      dockerfile: php.docker
+    container_name: php-app
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - 8080:443
+    volumes:
+      - ./src/php-app:/app
+
+  node-app:
+    restart: always
+    build:
+      context: ./docker/node
+      dockerfile: node.docker
+    container_name: node-app
+    command: npm run start:dev
+    ports:
+      - 8082:3000
+    volumes:
+      - ./src/node-app:/app
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+
+  composer:
+    logging:
+      driver: none
+    build:
+      context: ./docker/php
+      dockerfile: php-composer.docker
+    container_name: rr-composer
+    command: install
+    volumes:
+      - ./src/php-app:/app
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    logging:
+      driver: none
+    restart: always
+    environment:
+      RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
+      RABBITMQ_DEFAULT_USER: rabbit
+      RABBITMQ_DEFAULT_PASS: rabbit
+    volumes:
+      - ./docker/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins

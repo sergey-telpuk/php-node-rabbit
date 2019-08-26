@@ -1,0 +1,23 @@
+## PHP Image
+FROM php:7.3-zts
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  vim \
+  libzip-dev \
+  unzip
+
+# Install PHP Extensions
+RUN docker-php-ext-install \
+    zip \
+    opcache \
+    pdo \
+    pdo_mysql \
+    sockets
+
+RUN docker-php-ext-enable opcache sockets
+
+# Set up the application directory
+VOLUME ["/app"]
+WORKDIR /app
+
+ENTRYPOINT ["./spiral", "serve", "-v", "-d"]

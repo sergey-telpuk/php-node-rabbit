@@ -1,0 +1,8 @@
+FROM node:latest
+
+VOLUME ["/app"]
+WORKDIR /app
+
+EXPOSE 9229
+
+CMD ["node","--v"]
